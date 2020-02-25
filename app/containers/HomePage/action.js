@@ -1,4 +1,4 @@
-import { GET_BOARDS, GET_BOARDS_SUCCESS, ADD_NEW_BOARD, CREATE_BOARD, HANDLE_VALUE_CHANGE } from './constants';
+import { GET_BOARDS, GET_BOARDS_SUCCESS, ADD_NEW_BOARD, CREATE_BOARD, HANDLE_VALUE_CHANGE, CANCEL_ADDITION } from './constants';
 
 export function getBoards() {
     return {
@@ -36,5 +36,11 @@ export function handleValueChange(boardValue) {
 export function createBoard() {
     return {
         type: CREATE_BOARD
+    }
+}
+
+export function cancelAddition() {
+    return {
+        type: CANCEL_ADDITION
     }
 }

@@ -23,7 +23,7 @@ import AddBoardWrapper from './add-board-wrapper';
 import AddTaskButton from '../Board/add-task-button';
 import AddTileTextBox from './add-tile-textbox';
 import { makeSelectBoardList, makeSelectNewBoard, makeSelectNewBoardValue } from './selectors';
-import { getBoards, getAddBoard, handleValueChange, createBoard } from './action';
+import { getBoards, getAddBoard, handleValueChange, createBoard, cancelAddition } from './action';
 import messages from './messages';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -39,7 +39,8 @@ export function HomePage({
   fetchBoardData,
   getAddBoard,
   handleValue,
-  createBoard
+  createBoard,
+  cancelAddition
 }) {
 
   useInjectReducer({ key, reducer });
@@ -90,7 +91,7 @@ export function HomePage({
                   clicked={createBoard}>
                 </AddTaskButton>
                 <AddTaskButton buttonText={messages.createContentCancel}
-                  clicked={(evt, value) => getAddBoard(event, false)}>
+                  clicked={(evt) => cancelAddition(event)}>
                 </AddTaskButton>
               </div>
             </AddBoardWrapper>
@@ -111,7 +112,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchBoardData: () => dispatch(getBoards()),
   getAddBoard: (evt, value) => dispatch(getAddBoard(value)),
   handleValue: (evt) => dispatch(handleValueChange(evt.target.value)),
-  createBoard: (evt) => dispatch(createBoard())
+  createBoard: (evt) => dispatch(createBoard()),
+  cancelAddition: (evt) => dispatch(cancelAddition())
 });
 
 const withConnect = connect(
